@@ -16,6 +16,7 @@ export const textAlign = {
 var fontHeightCache: { [id: string]: number; } = {};
 
 export function getFontHeight (fontStyle: string) {
+  return parseFloat(fontStyle) * window.devicePixelRatio
   var result = fontHeightCache[fontStyle];
 
   if (!result)

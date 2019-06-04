@@ -27,12 +27,16 @@ export class CanvasText {
 
     const lineHeight = getFontHeight(ctxOptions.font);
     const lines = (text || "").toString().split("\n");
-    this.textWidth = Math.max.apply(null, lines.map(line => Math.ceil(this.ctx.measureText(line).width)));
+    this.textWidth = Math.max.apply(null, lines.map(line => Math.ceil(this.ctx.measureText(line).width * window.devicePixelRatio)));
     this.textHeight = lineHeight + lineHeight * ctxOptions.lineHeight * (lines.length - 1);
 
     // 2 = prevent canvas being 0 size when using empty / null text
-    this.canvas.width = Math.max(2, THREE.Math.ceilPowerOfTwo(this.textWidth));
-    this.canvas.height = Math.max(2, THREE.Math.ceilPowerOfTwo(this.textHeight));
+    this.canvas.width = Math.max(2, Math.ceil(this.textWidth));
+    this.canvas.height = Math.max(2, Math.ceil(this.textHeight));
+    if(ctxOptions.bgColor){
+      this.ctx.fillStyle = ctxOptions.bgColor
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    }
 
     this.ctx.font = ctxOptions.font
 
@@ -50,7 +54,7 @@ export class CanvasText {
 
     const x = this.textWidth * (0.5 - ctxOptions.align.x * 0.5);
     for (let i = 0; i < lines.length; i++) {
-      this.ctx.fillText(lines[i], x, lineHeight * ctxOptions.lineHeight * i);
+      this.ctx.fillText(lines[i], x, lineHeight * ctxOptions.lineHeight * i/window.devicePixelRatio);
     }
     return this.canvas
   }

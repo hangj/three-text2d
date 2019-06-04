@@ -26,7 +26,8 @@ export class MeshText2D extends Text2D {
       shadowOffsetX: this._shadowOffsetX,
       shadowOffsetY: this._shadowOffsetY,
       lineHeight: this._lineHeight,
-      align: this.align
+      align: this.align,
+      bgColor: this._bgColor
     })
 
     this.texture = new THREE.Texture(this.canvas.canvas);
@@ -56,6 +57,7 @@ export class MeshText2D extends Text2D {
     this.geometry.vertices[0].y = this.geometry.vertices[1].y = this.canvas.height/2
     this.geometry.vertices[2].y = this.geometry.vertices[3].y = -this.canvas.height/2
     this.geometry.verticesNeedUpdate = true
+    this.geometry.computeBoundingSphere()
   }
 
 }

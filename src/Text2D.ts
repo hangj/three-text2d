@@ -47,6 +47,7 @@ export abstract class Text2D extends THREE.Object3D {
     this._shadowOffsetX = options.shadowOffsetX || 0;
     this._shadowOffsetY = options.shadowOffsetY || 0;
     this._lineHeight = options.lineHeight || 1.2;
+    this._bgColor = options.bgColor;
 
     this.canvas = new CanvasText()
 

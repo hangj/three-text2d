@@ -15,7 +15,8 @@ export class SpriteText2D extends Text2D{
       font: this._font,
       fillStyle: this._fillStyle,
       lineHeight: this._lineHeight,
-      align: this.align
+      align: this.align,
+      bgColor: this._bgColor
     })
 
     // cleanup previous texture
